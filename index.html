@@ -99,9 +99,7 @@
       font-size: 13px;
     }
 
-    #settings-menu[hidden] {
-      display: none;
-    }
+    #settings-menu[hidden] { display: none; }
 
     #settings-menu {
       position: fixed;
@@ -123,23 +121,10 @@
       box-shadow: 0 8px 30px #0008;
     }
 
-    #settings-panel h2 {
-      margin: 0 0 18px;
-    }
-
-    #settings-panel label {
-      display: block;
-      margin: 14px 0 6px;
-    }
-
-    #settings-panel input[type="range"] {
-      width: 100%;
-    }
-
-    #settings-panel output {
-      float: right;
-      color: #fbbf24;
-    }
+    #settings-panel h2 { margin: 0 0 18px; }
+    #settings-panel label { display: block; margin: 14px 0 6px; }
+    #settings-panel input[type="range"] { width: 100%; }
+    #settings-panel output { float: right; color: #fbbf24; }
 
     .checkbox-row {
       display: flex !important;
@@ -161,9 +146,7 @@
     #reset-world-btn { background: #b83232; }
     #close-settings-btn { background: #555; }
 
-    #main-menu[hidden] {
-      display: none;
-    }
+    #main-menu[hidden] { display: none; }
 
     #main-menu {
       position: fixed;
@@ -212,17 +195,9 @@
       font-size: 16px;
     }
 
-    #main-menu button:hover {
-      background: #65c965;
-    }
-
-    #main-menu-settings-btn {
-      background: #555 !important;
-    }
-
-    #main-menu-reset-btn {
-      background: #a83232 !important;
-    }
+    #main-menu button:hover { background: #65c965; }
+    #main-menu-settings-btn { background: #555 !important; }
+    #main-menu-reset-btn { background: #a83232 !important; }
 
     #mobile-ui {
       position: absolute;
@@ -242,11 +217,7 @@
       touch-action: none;
     }
 
-    #joystick,
-    #jump-btn,
-    #cam-btn {
-      z-index: 3;
-    }
+    #joystick, #jump-btn, #cam-btn { z-index: 3; }
 
     #joystick {
       position: absolute;
@@ -272,8 +243,7 @@
       transform: translate(-50%,-50%);
     }
 
-    #jump-btn,
-    #cam-btn {
+    #jump-btn, #cam-btn {
       position: absolute;
       right: 40px;
       border: 2px solid #666;
@@ -315,7 +285,6 @@
   </div>
 
   <div id="account"></div>
-
   <button id="settings-btn" type="button">⚙ Settings</button>
 
   <div id="settings-menu" hidden>
@@ -323,62 +292,39 @@
       <h2>Settings</h2>
 
       <label for="fov-slider">
-        FOV:
-        <output id="fov-value">75</output>
+        FOV: <output id="fov-value">75</output>
       </label>
       <input id="fov-slider" type="range" min="50" max="110" value="75">
 
       <label for="sensitivity-slider">
-        Sensitivity:
-        <output id="sensitivity-value">0.0020</output>
+        Sensitivity: <output id="sensitivity-value">0.0020</output>
       </label>
-      <input
-        id="sensitivity-slider"
-        type="range"
-        min="0.0005"
-        max="0.006"
-        step="0.0001"
-        value="0.002"
-      >
+      <input id="sensitivity-slider" type="range" min="0.0005" max="0.006" step="0.0001" value="0.002">
 
       <label class="checkbox-row">
         <input id="invert-look-checkbox" type="checkbox">
         Invert vertical look
       </label>
 
-      <button id="reset-world-btn" type="button">
-        Reset World
-      </button>
-
-      <button id="close-settings-btn" type="button">
-        Close
-      </button>
+      <button id="reset-world-btn" type="button">Reset World</button>
+      <button id="close-settings-btn" type="button">Close</button>
     </div>
   </div>
 
   <div id="main-menu">
     <div id="main-menu-panel">
       <h1 id="main-menu-title">Minecraft HTML Edition</h1>
-      <p id="main-menu-subtitle">
-        Welcome, <span id="main-menu-username"></span>
-      </p>
-
+      <p id="main-menu-subtitle">Welcome, <span id="main-menu-username"></span></p>
       <button id="play-btn" type="button">Play</button>
-      <button id="main-menu-settings-btn" type="button">
-        Settings
-      </button>
-      <button id="main-menu-reset-btn" type="button">
-        Reset World
-      </button>
+      <button id="main-menu-settings-btn" type="button">Settings</button>
+      <button id="main-menu-reset-btn" type="button">Reset World</button>
     </div>
   </div>
 
   <div id="hotbar"></div>
 
   <div id="mobile-ui" style="display:none">
-    <div id="joystick">
-      <div id="joystick-knob"></div>
-    </div>
+    <div id="joystick"><div id="joystick-knob"></div></div>
     <div id="jump-btn">JUMP</div>
     <div id="cam-btn">CAM</div>
     <div id="look-area"></div>
@@ -391,11 +337,9 @@
 
     const WORLD_SIZE = 20;
     const HEIGHT_LIMIT = 20;
-
     const GROUND_Y = 0.5;
     const PLAYER_RADIUS = 0.35;
     const PLAYER_HEIGHT = 2.0;
-
     const MOVE_SPEED = 3.5;
     const GRAVITY = 20;
     const JUMP_SPEED = 8.5;
@@ -403,15 +347,10 @@
     let mouseSensitivity = 0.0008;
     let touchSensitivity = 0.002;
     const JOYSTICK_STRENGTH = 0.7;
-
     let invertLook = false;
     let selectedBlock = "grass";
     let gameStarted = false;
     let resettingWorld = false;
-
-    // ------------------------------------------------------------
-    // Account
-    // ------------------------------------------------------------
 
     let username = localStorage.getItem("mc_html_username");
 
@@ -422,11 +361,8 @@
 
     function escapeHtml(value) {
       return String(value).replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#039;"
       }[character]));
     }
 
@@ -438,12 +374,19 @@
     const mainMenu = document.getElementById("main-menu");
     const mainMenuUsername = document.getElementById("main-menu-username");
     const playButton = document.getElementById("play-btn");
-    const mainMenuSettingsButton =
-      document.getElementById("main-menu-settings-btn");
-    const mainMenuResetButton =
-      document.getElementById("main-menu-reset-btn");
-
+    const mainMenuSettingsButton = document.getElementById("main-menu-settings-btn");
+    const mainMenuResetButton = document.getElementById("main-menu-reset-btn");
     mainMenuUsername.textContent = username;
+
+    const settingsButton = document.getElementById("settings-btn");
+    const settingsMenu = document.getElementById("settings-menu");
+    const closeSettingsButton = document.getElementById("close-settings-btn");
+    const fovSlider = document.getElementById("fov-slider");
+    const fovValue = document.getElementById("fov-value");
+    const sensitivitySlider = document.getElementById("sensitivity-slider");
+    const sensitivityValue = document.getElementById("sensitivity-value");
+    const invertLookCheckbox = document.getElementById("invert-look-checkbox");
+    const resetWorldButton = document.getElementById("reset-world-btn");
 
     playButton.addEventListener("click", () => {
       gameStarted = true;
@@ -454,32 +397,6 @@
       settingsMenu.hidden = false;
     });
 
-    mainMenuResetButton.addEventListener("click", resetWorld);
-
-    // ------------------------------------------------------------
-    // Settings
-    // ------------------------------------------------------------
-
-    const settingsButton = document.getElementById("settings-btn");
-    const settingsMenu = document.getElementById("settings-menu");
-    const closeSettingsButton =
-      document.getElementById("close-settings-btn");
-
-    const fovSlider = document.getElementById("fov-slider");
-    const fovValue = document.getElementById("fov-value");
-
-    const sensitivitySlider =
-      document.getElementById("sensitivity-slider");
-
-    const sensitivityValue =
-      document.getElementById("sensitivity-value");
-
-    const invertLookCheckbox =
-      document.getElementById("invert-look-checkbox");
-
-    const resetWorldButton =
-      document.getElementById("reset-world-btn");
-
     settingsButton.addEventListener("click", event => {
       event.stopPropagation();
       settingsMenu.hidden = false;
@@ -487,17 +404,13 @@
 
     closeSettingsButton.addEventListener("click", () => {
       settingsMenu.hidden = true;
-      if (!gameStarted) {
-        mainMenu.hidden = false;
-      }
+      if (!gameStarted) mainMenu.hidden = false;
     });
 
     settingsMenu.addEventListener("click", event => {
       if (event.target === settingsMenu) {
         settingsMenu.hidden = true;
-        if (!gameStarted) {
-          mainMenu.hidden = false;
-        }
+        if (!gameStarted) mainMenu.hidden = false;
       }
     });
 
@@ -510,10 +423,8 @@
 
     sensitivitySlider.addEventListener("input", () => {
       const value = Number(sensitivitySlider.value);
-
       touchSensitivity = value;
       mouseSensitivity = value * 0.4;
-
       sensitivityValue.value = value.toFixed(4);
       localStorage.setItem("mc_sensitivity", value);
     });
@@ -524,30 +435,24 @@
     });
 
     function resetWorld() {
-      if (!confirm("Reset your world? This deletes placed blocks.")) {
-        return;
-      }
+      if (!confirm("Reset your world? This deletes placed blocks.")) return;
 
       resettingWorld = true;
       localStorage.removeItem("mc_world_" + username);
 
-      if (worldSaveInterval) {
-        clearInterval(worldSaveInterval);
-      }
-
+      if (worldSaveInterval) clearInterval(worldSaveInterval);
       location.reload();
     }
 
     resetWorldButton.addEventListener("click", resetWorld);
+    mainMenuResetButton.addEventListener("click", resetWorld);
 
     function loadSettings() {
       const savedFov = Number(localStorage.getItem("mc_fov"));
       const savedSensitivity = Number(localStorage.getItem("mc_sensitivity"));
 
       if (Number.isFinite(savedFov)) {
-        fovSlider.value = String(
-          THREE.MathUtils.clamp(savedFov, 50, 110)
-        );
+        fovSlider.value = String(THREE.MathUtils.clamp(savedFov, 50, 110));
       }
 
       if (Number.isFinite(savedSensitivity)) {
@@ -559,25 +464,17 @@
       invertLook = false;
       localStorage.setItem("mc_invert_look", "false");
       invertLookCheckbox.checked = false;
-
       camera.fov = Number(fovSlider.value);
       camera.updateProjectionMatrix();
-
       touchSensitivity = Number(sensitivitySlider.value);
       mouseSensitivity = touchSensitivity * 0.4;
-
       fovValue.value = fovSlider.value;
       sensitivityValue.value = touchSensitivity.toFixed(4);
     }
 
-    // ------------------------------------------------------------
-    // Textures and Three.js
-    // ------------------------------------------------------------
-
     function makePixelTexture(colors) {
       const canvas = document.createElement("canvas");
       canvas.width = canvas.height = 16;
-
       const context = canvas.getContext("2d");
 
       for (let y = 0; y < 16; y++) {
@@ -593,17 +490,9 @@
       return texture;
     }
 
-    const grassTex = makePixelTexture([
-      "#3ba635", "#2f8f2f", "#4acb3f"
-    ]);
-
-    const stoneTex = makePixelTexture([
-      "#7d7d7d", "#6b6b6b", "#8f8f8f"
-    ]);
-
-    const woodTex = makePixelTexture([
-      "#a56b3f", "#8b5a2b", "#b87333"
-    ]);
+    const grassTex = makePixelTexture(["#3ba635", "#2f8f2f", "#4acb3f"]);
+    const stoneTex = makePixelTexture(["#7d7d7d", "#6b6b6b", "#8f8f8f"]);
+    const woodTex = makePixelTexture(["#a56b3f", "#8b5a2b", "#b87333"]);
 
     const mats = {
       grass: new THREE.MeshLambertMaterial({ map: grassTex }),
@@ -615,14 +504,10 @@
     scene.background = new THREE.Color(0x87ceeb);
 
     const camera = new THREE.PerspectiveCamera(
-      75,
-      innerWidth / innerHeight,
-      0.1,
-      1000
+      75, innerWidth / innerHeight, 0.1, 1000
     );
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.setSize(innerWidth, innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -632,31 +517,17 @@
     scene.add(sun);
     scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
-    // ------------------------------------------------------------
-    // World
-    // ------------------------------------------------------------
-
     const world = [];
     const blockMeshes = new Set();
     const blockGeometry = new THREE.BoxGeometry(1, 1, 1);
 
     for (let x = 0; x < WORLD_SIZE; x++) {
       world[x] = [];
-
-      for (let z = 0; z < WORLD_SIZE; z++) {
-        world[x][z] = [];
-      }
+      for (let z = 0; z < WORLD_SIZE; z++) world[x][z] = [];
     }
 
     function insideWorld(x, y, z) {
-      return (
-        x >= 0 &&
-        x < WORLD_SIZE &&
-        y >= 0 &&
-        y < HEIGHT_LIMIT &&
-        z >= 0 &&
-        z < WORLD_SIZE
-      );
+      return x >= 0 && x < WORLD_SIZE && y >= 0 && y < HEIGHT_LIMIT && z >= 0 && z < WORLD_SIZE;
     }
 
     function createBlock(x, y, z, type) {
@@ -664,46 +535,27 @@
       if (world[x][z][y]) return world[x][z][y].mesh;
 
       const actualType = mats[type] ? type : "stone";
-
-      const mesh = new THREE.Mesh(
-        blockGeometry,
-        mats[actualType]
-      );
-
+      const mesh = new THREE.Mesh(blockGeometry, mats[actualType]);
       mesh.position.set(x, y, z);
       mesh.userData.isBlock = true;
-
       scene.add(mesh);
       blockMeshes.add(mesh);
-
-      world[x][z][y] = {
-        mesh,
-        type: actualType
-      };
-
+      world[x][z][y] = { mesh, type: actualType };
       return mesh;
     }
 
     function removeBlock(x, y, z) {
       if (!insideWorld(x, y, z)) return;
-
       const cell = world[x][z][y];
       if (!cell) return;
-
       scene.remove(cell.mesh);
       blockMeshes.delete(cell.mesh);
       world[x][z][y] = null;
     }
 
     for (let x = 0; x < WORLD_SIZE; x++) {
-      for (let z = 0; z < WORLD_SIZE; z++) {
-        createBlock(x, 0, z, "grass");
-      }
+      for (let z = 0; z < WORLD_SIZE; z++) createBlock(x, 0, z, "grass");
     }
-
-    // ------------------------------------------------------------
-    // Clouds
-    // ------------------------------------------------------------
 
     const clouds = [];
 
@@ -712,17 +564,12 @@
       const material = new THREE.MeshLambertMaterial({ color: 0xffffff });
 
       for (let i = 0; i < 5; i++) {
-        const cube = new THREE.Mesh(
-          new THREE.BoxGeometry(2, 1, 2),
-          material
-        );
-
+        const cube = new THREE.Mesh(new THREE.BoxGeometry(2, 1, 2), material);
         cube.position.set(
           (Math.random() - 0.5) * 4,
           (Math.random() - 0.5),
           (Math.random() - 0.5) * 4
         );
-
         group.add(cube);
       }
 
@@ -738,10 +585,6 @@
         Math.random() * WORLD_SIZE
       );
     }
-
-    // ------------------------------------------------------------
-    // Player
-    // ------------------------------------------------------------
 
     const playerPos = new THREE.Vector3(
       WORLD_SIZE / 2,
@@ -778,16 +621,9 @@
     addPlayerPart(new THREE.BoxGeometry(.12,.42,.7), bobHair, .43, 1.78, 0);
     addPlayerPart(new THREE.BoxGeometry(.16,.16,.18), bobSkin, 0, 1.55, .43);
 
-    const mustacheLeft = addPlayerPart(
-      new THREE.BoxGeometry(.24,.1,.12),
-      bobHair, -.12, 1.43, .43
-    );
+    const mustacheLeft = addPlayerPart(new THREE.BoxGeometry(.24,.1,.12), bobHair, -.12, 1.43, .43);
     mustacheLeft.rotation.z = -.15;
-
-    const mustacheRight = addPlayerPart(
-      new THREE.BoxGeometry(.24,.1,.12),
-      bobHair, .12, 1.43, .43
-    );
+    const mustacheRight = addPlayerPart(new THREE.BoxGeometry(.24,.1,.12), bobHair, .12, 1.43, .43);
     mustacheRight.rotation.z = .15;
 
     addPlayerPart(new THREE.BoxGeometry(1,1.2,.6), bobShirt, 0, .7, 0);
@@ -799,36 +635,27 @@
     addPlayerPart(new THREE.BoxGeometry(.44,.18,.55), bobShoes, -.2, -.42, .08);
     addPlayerPart(new THREE.BoxGeometry(.44,.18,.55), bobShoes, .2, -.42, .08);
 
-    // ------------------------------------------------------------
-    // Input
-    // ------------------------------------------------------------
-
-    const isTouch =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0;
-
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     const keys = {};
     const mobileUI = document.getElementById("mobile-ui");
 
-    if (isTouch) {
-      mobileUI.style.display = "block";
-    }
+    if (isTouch) mobileUI.style.display = "block";
+
+    const BLOCK_TYPES = [
+      { id: "grass", name: "Grass" },
+      { id: "stone", name: "Stone" },
+      { id: "wood", name: "Wood" }
+    ];
 
     if (!isTouch) {
       document.addEventListener("keydown", event => {
         keys[event.code] = true;
 
-        if (event.code === "Space" || event.code === "F5") {
-          event.preventDefault();
-        }
-
-        if (event.code === "F5") {
-          camMode = (camMode + 1) % 3;
-        }
+        if (event.code === "Space" || event.code === "F5") event.preventDefault();
+        if (event.code === "F5") camMode = (camMode + 1) % 3;
 
         if (event.code.startsWith("Digit")) {
           const index = Number(event.code.slice(5)) - 1;
-
           if (BLOCK_TYPES[index]) {
             selectedBlock = BLOCK_TYPES[index].id;
             renderHotbar();
@@ -841,48 +668,27 @@
       });
 
       document.body.addEventListener("click", event => {
-        if (
-          event.target.closest("#hotbar") ||
-          event.target.closest("#settings-btn")
-        ) {
-          return;
-        }
-
-        if (document.pointerLockElement !== document.body) {
-          document.body.requestPointerLock();
-        }
+        if (event.target.closest("#hotbar") || event.target.closest("#settings-btn")) return;
+        if (document.pointerLockElement !== document.body) document.body.requestPointerLock();
       });
 
       document.addEventListener("mousemove", event => {
         if (document.pointerLockElement !== document.body) return;
 
         const verticalDirection = invertLook ? -1 : 1;
-
         yaw += event.movementX * mouseSensitivity;
         pitch += event.movementY * mouseSensitivity * verticalDirection;
-
-        pitch = THREE.MathUtils.clamp(
-          pitch,
-          -Math.PI / 2 + .1,
-          Math.PI / 2 - .1
-        );
+        pitch = THREE.MathUtils.clamp(pitch, -Math.PI / 2 + .1, Math.PI / 2 - .1);
       });
 
       document.addEventListener("mousedown", event => {
         if (event.target.closest("#hotbar")) return;
-
         if (event.button === 0) placeBlockFromRay();
         if (event.button === 2) breakBlockFromRay();
       });
 
-      document.addEventListener("contextmenu", event => {
-        event.preventDefault();
-      });
+      document.addEventListener("contextmenu", event => event.preventDefault());
     }
-
-    // ------------------------------------------------------------
-    // Mobile camera
-    // ------------------------------------------------------------
 
     const lookArea = document.getElementById("look-area");
 
@@ -891,13 +697,8 @@
 
       lookArea.addEventListener("touchstart", event => {
         if (!event.touches.length) return;
-
         const touch = event.touches[0];
-
-        lastLookTouch = {
-          x: touch.clientX,
-          y: touch.clientY
-        };
+        lastLookTouch = { x: touch.clientX, y: touch.clientY };
       }, { passive: true });
 
       lookArea.addEventListener("touchmove", event => {
@@ -910,38 +711,19 @@
 
         yaw += dx * touchSensitivity;
         pitch += dy * touchSensitivity * verticalDirection;
-
-        lastLookTouch = {
-          x: touch.clientX,
-          y: touch.clientY
-        };
-
-        pitch = THREE.MathUtils.clamp(
-          pitch,
-          -Math.PI / 2 + .1,
-          Math.PI / 2 - .1
-        );
+        lastLookTouch = { x: touch.clientX, y: touch.clientY };
+        pitch = THREE.MathUtils.clamp(pitch, -Math.PI / 2 + .1, Math.PI / 2 - .1);
       }, { passive: true });
 
-      lookArea.addEventListener("touchend", () => {
-        lastLookTouch = null;
-      }, { passive: true });
-
-      lookArea.addEventListener("touchcancel", () => {
-        lastLookTouch = null;
-      }, { passive: true });
+      lookArea.addEventListener("touchend", () => { lastLookTouch = null; }, { passive: true });
+      lookArea.addEventListener("touchcancel", () => { lastLookTouch = null; }, { passive: true });
     }
-
-    // ------------------------------------------------------------
-    // Mobile joystick
-    // ------------------------------------------------------------
 
     const joyVec = { x: 0, y: 0 };
 
     if (isTouch) {
       const joystick = document.getElementById("joystick");
       const knob = document.getElementById("joystick-knob");
-
       let joystickActive = false;
       let centerX = 0;
       let centerY = 0;
@@ -955,9 +737,7 @@
 
       joystick.addEventListener("touchstart", event => {
         event.preventDefault();
-
         joystickActive = true;
-
         const rect = joystick.getBoundingClientRect();
         centerX = rect.left + rect.width / 2;
         centerY = rect.top + rect.height / 2;
@@ -965,23 +745,23 @@
 
       joystick.addEventListener("touchmove", event => {
         if (!joystickActive || !event.touches.length) return;
-
         event.preventDefault();
 
         const touch = event.touches[0];
         const dx = touch.clientX - centerX;
         const dy = touch.clientY - centerY;
-
         const maxDistance = 30;
         const distance = Math.hypot(dx, dy);
         const scale = distance > maxDistance ? maxDistance / distance : 1;
-
         const limitedX = dx * scale;
         const limitedY = dy * scale;
 
         knob.style.transform = `translate(${limitedX - 20}px,${limitedY - 20}px)`;
 
-        joyVec.x = (limitedX / maxDistance) * JOYSTICK_STRENGTH;
+        // Match the screen direction: left is negative, right is positive.
+        // The movement basis uses the opposite horizontal handedness, so
+        // invert this value before applying it to player movement.
+        joyVec.x = (-limitedX / maxDistance) * JOYSTICK_STRENGTH;
         joyVec.y = (-limitedY / maxDistance) * JOYSTICK_STRENGTH;
       }, { passive: false });
 
@@ -993,7 +773,6 @@
 
       jumpButton.addEventListener("touchstart", event => {
         event.preventDefault();
-
         if (onGround) {
           velocityY = JUMP_SPEED;
           onGround = false;
@@ -1005,10 +784,6 @@
         camMode = (camMode + 1) % 3;
       }, { passive: false });
     }
-
-    // ------------------------------------------------------------
-    // Collision
-    // ------------------------------------------------------------
 
     function blockOverlapsPlayer(x, y, z, position) {
       return (
@@ -1032,9 +807,7 @@
       for (let x = minX; x <= maxX; x++) {
         for (let z = minZ; z <= maxZ; z++) {
           for (let y = minY; y <= maxY; y++) {
-            if (world[x][z][y] && blockOverlapsPlayer(x, y, z, position)) {
-              return true;
-            }
+            if (world[x][z][y] && blockOverlapsPlayer(x, y, z, position)) return true;
           }
         }
       }
@@ -1044,7 +817,6 @@
 
     function getStandingHeight(position, maximumY) {
       let floorY = GROUND_Y;
-
       const minX = Math.max(0, Math.floor(position.x - PLAYER_RADIUS - 1));
       const maxX = Math.min(WORLD_SIZE - 1, Math.ceil(position.x + PLAYER_RADIUS + 1));
       const minZ = Math.max(0, Math.floor(position.z - PLAYER_RADIUS - 1));
@@ -1058,14 +830,9 @@
             const overlapsHorizontally =
               Math.abs(position.x - x) < PLAYER_RADIUS + .5 &&
               Math.abs(position.z - z) < PLAYER_RADIUS + .5;
-
             const blockTop = y + .5;
 
-            if (
-              overlapsHorizontally &&
-              blockTop <= maximumY + .05 &&
-              blockTop > floorY
-            ) {
+            if (overlapsHorizontally && blockTop <= maximumY + .05 && blockTop > floorY) {
               floorY = blockTop;
             }
           }
@@ -1075,13 +842,8 @@
       return floorY;
     }
 
-    // ------------------------------------------------------------
-    // Movement and camera
-    // ------------------------------------------------------------
-
     function updatePlayer(deltaTime) {
       const dt = Math.min(deltaTime, .05);
-
       const forward = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw));
       const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
       const move = new THREE.Vector3();
@@ -1106,17 +868,11 @@
 
         const nextX = playerPos.clone();
         nextX.x += move.x;
-
-        if (!collidesWithBlock(nextX)) {
-          playerPos.x = nextX.x;
-        }
+        if (!collidesWithBlock(nextX)) playerPos.x = nextX.x;
 
         const nextZ = playerPos.clone();
         nextZ.z += move.z;
-
-        if (!collidesWithBlock(nextZ)) {
-          playerPos.z = nextZ.z;
-        }
+        if (!collidesWithBlock(nextZ)) playerPos.z = nextZ.z;
       }
 
       playerPos.x = THREE.MathUtils.clamp(playerPos.x, PLAYER_RADIUS, WORLD_SIZE - 1 - PLAYER_RADIUS);
@@ -1124,7 +880,6 @@
 
       const previousY = playerPos.y;
       velocityY -= GRAVITY * dt;
-
       const nextY = playerPos.clone();
       nextY.y += velocityY * dt;
 
@@ -1140,12 +895,8 @@
           onGround = false;
         }
       } else {
-        if (collidesWithBlock(nextY)) {
-          velocityY = 0;
-        } else {
-          playerPos.y = nextY.y;
-        }
-
+        if (collidesWithBlock(nextY)) velocityY = 0;
+        else playerPos.y = nextY.y;
         onGround = false;
       }
 
@@ -1175,16 +926,6 @@
       }
     }
 
-    // ------------------------------------------------------------
-    // Hotbar
-    // ------------------------------------------------------------
-
-    const BLOCK_TYPES = [
-      { id: "grass", name: "Grass" },
-      { id: "stone", name: "Stone" },
-      { id: "wood", name: "Wood" }
-    ];
-
     const hotbar = document.getElementById("hotbar");
 
     function renderHotbar() {
@@ -1192,24 +933,16 @@
 
       BLOCK_TYPES.forEach(blockType => {
         const slot = document.createElement("div");
-
         slot.className = "slot" + (blockType.id === selectedBlock ? " selected" : "");
 
         const inner = document.createElement("div");
         inner.className = "slot-inner";
 
-        const texture =
-          blockType.id === "grass"
-            ? grassTex
-            : blockType.id === "stone"
-              ? stoneTex
-              : woodTex;
-
+        const texture = blockType.id === "grass" ? grassTex : blockType.id === "stone" ? stoneTex : woodTex;
         inner.style.backgroundImage = `url(${texture.image.toDataURL()})`;
 
         const label = document.createElement("div");
         label.textContent = blockType.name;
-
         slot.appendChild(inner);
         slot.appendChild(label);
 
@@ -1225,10 +958,6 @@
 
     renderHotbar();
 
-    // ------------------------------------------------------------
-    // Block actions
-    // ------------------------------------------------------------
-
     const raycaster = new THREE.Raycaster();
 
     function getLookDirection() {
@@ -1241,16 +970,13 @@
       raycaster.set(camera.position, getLookDirection());
       raycaster.near = 0;
       raycaster.far = 5;
-
       return raycaster.intersectObjects(Array.from(blockMeshes), false);
     }
 
     function isInsidePlayer(x, y, z) {
-      return (
-        Math.abs(x - playerPos.x) < 1 &&
+      return Math.abs(x - playerPos.x) < 1 &&
         Math.abs(y - (playerPos.y + 1)) < 2 &&
-        Math.abs(z - playerPos.z) < 1
-      );
+        Math.abs(z - playerPos.z) < 1;
     }
 
     function placeBlockFromRay() {
@@ -1261,15 +987,11 @@
       if (!hit.face || !hit.object) return;
 
       const normal = hit.face.normal;
-
       const x = Math.round(hit.object.position.x + normal.x);
       const y = Math.round(hit.object.position.y + normal.y);
       const z = Math.round(hit.object.position.z + normal.z);
 
-      if (!insideWorld(x, y, z)) return;
-      if (world[x][z][y]) return;
-      if (isInsidePlayer(x, y, z)) return;
-
+      if (!insideWorld(x, y, z) || world[x][z][y] || isInsidePlayer(x, y, z)) return;
       createBlock(x, y, z, selectedBlock);
     }
 
@@ -1278,19 +1000,13 @@
       if (!hits.length) return;
 
       const block = hits[0].object;
-
       const x = Math.round(block.position.x);
       const y = Math.round(block.position.y);
       const z = Math.round(block.position.z);
 
       if (y === 0) return;
-
       removeBlock(x, y, z);
     }
-
-    // ------------------------------------------------------------
-    // Mobile place and break
-    // ------------------------------------------------------------
 
     if (isTouch) {
       let touchStart = null;
@@ -1299,17 +1015,9 @@
 
       lookArea.addEventListener("touchstart", event => {
         if (!event.touches.length) return;
-
         event.preventDefault();
-
         const touch = event.touches[0];
-
-        touchStart = {
-          x: touch.clientX,
-          y: touch.clientY,
-          time: performance.now()
-        };
-
+        touchStart = { x: touch.clientX, y: touch.clientY, time: performance.now() };
         touchMoved = false;
 
         touchTimer = setTimeout(() => {
@@ -1320,14 +1028,11 @@
 
       lookArea.addEventListener("touchmove", event => {
         if (!touchStart || !event.touches.length) return;
-
         event.preventDefault();
 
         const touch = event.touches[0];
-
         if (Math.hypot(touch.clientX - touchStart.x, touch.clientY - touchStart.y) > 8) {
           touchMoved = true;
-
           if (touchTimer) {
             clearTimeout(touchTimer);
             touchTimer = null;
@@ -1337,7 +1042,6 @@
 
       lookArea.addEventListener("touchend", event => {
         if (!touchStart) return;
-
         event.preventDefault();
 
         if (touchTimer) {
@@ -1345,39 +1049,27 @@
           touchTimer = null;
         }
 
-        if (!touchMoved && performance.now() - touchStart.time < 350) {
-          placeBlockFromRay();
-        }
-
+        if (!touchMoved && performance.now() - touchStart.time < 350) placeBlockFromRay();
         touchStart = null;
         touchMoved = false;
       }, { passive: false });
 
       lookArea.addEventListener("touchcancel", () => {
         if (touchTimer) clearTimeout(touchTimer);
-
         touchTimer = null;
         touchStart = null;
         touchMoved = false;
       });
     }
 
-    // ------------------------------------------------------------
-    // Save and load
-    // ------------------------------------------------------------
-
     function saveWorld() {
-      if (resettingWorld) {
-        return;
-      }
-
+      if (resettingWorld) return;
       const data = [];
 
       for (let x = 0; x < WORLD_SIZE; x++) {
         for (let z = 0; z < WORLD_SIZE; z++) {
           for (let y = 0; y < HEIGHT_LIMIT; y++) {
             const cell = world[x][z][y];
-
             if (cell && !(y === 0 && cell.type === "grass")) {
               data.push({ x, y, z, type: cell.type });
             }
@@ -1390,21 +1082,14 @@
 
     function loadWorld() {
       const raw = localStorage.getItem("mc_world_" + username);
-
       if (!raw) return;
 
       try {
         const data = JSON.parse(raw);
-
         if (!Array.isArray(data)) return;
 
         data.forEach(block => {
-          if (
-            block &&
-            Number.isInteger(block.x) &&
-            Number.isInteger(block.y) &&
-            Number.isInteger(block.z)
-          ) {
+          if (block && Number.isInteger(block.x) && Number.isInteger(block.y) && Number.isInteger(block.z)) {
             createBlock(block.x, block.y, block.z, block.type);
           }
         });
@@ -1419,10 +1104,6 @@
     let worldSaveInterval = setInterval(saveWorld, 5000);
     window.addEventListener("beforeunload", saveWorld);
 
-    // ------------------------------------------------------------
-    // Resize and game loop
-    // ------------------------------------------------------------
-
     window.addEventListener("resize", () => {
       camera.aspect = innerWidth / innerHeight;
       camera.updateProjectionMatrix();
@@ -1434,15 +1115,11 @@
     function animate(now) {
       const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
-
       updatePlayer(dt);
 
       clouds.forEach(cloud => {
         cloud.position.x += 0.2 * dt;
-
-        if (cloud.position.x > WORLD_SIZE + 10) {
-          cloud.position.x = -10;
-        }
+        if (cloud.position.x > WORLD_SIZE + 10) cloud.position.x = -10;
       });
 
       renderer.render(scene, camera);
